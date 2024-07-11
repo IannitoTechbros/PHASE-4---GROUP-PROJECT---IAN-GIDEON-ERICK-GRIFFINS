@@ -1,0 +1,97 @@
+import React, { useState } from 'react';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
+import axios from 'axios';
+import { Link, useNavigate } from 'react-router-dom';
+
+function Login() {
+    const [message, setMessage] = useState(null);
+    const navigate = useNavigate();
+
+    const formik = useFormik({
+        initialValues: {
+            email: '',
+            password: ''
+        },
+        validationSchema: Yup.object({
+            email: Yup.string()
+                .email('Invalid email')
+                .required('Email is required'),
+            password: Yup.string()
+                .required('Password is required')
+        }),
+        onSubmit: async (values) => {
+            try {
+                const response = await axios.post('/login', values);
+                if (response.status === 200) {
+                    localStorage.setItem('token', response.data.access_token);
+                    
+                    setMessage('Logged in successfully');
+                    setTimeout(() => {
+                        setMessage(null);
+                        navigate('/events');
+                    }, 600);
+                    formik.resetForm();
+                }
+            } catch (error) {
+                console.error('Error logging in:', error);
+                setMessage(error.response?.data?.message || 'Invalid credentials. Please try again.');
+                setTimeout(() => {
+                    setMessage(null);
+                }, 3000);
+            }
+        }
+    });
+
+    return (
+        <div className='flex flex-col items-center justify-center min-h-screen'>
+            <form className='bg-accent1 shadow-md rounded px-8 pt-6 pb-8 mb-4 w-80' onSubmit={formik.handleSubmit}>
+                <h2 className='text-2xl text-center font-bold mb-6'>Login</h2>
+                {message && (
+                    <p className={message === 'Logged in successfully' ? 'text-green-500 text-center mb-4' : 'text-red-500 text-center mb-4'}>
+                        {message}
+                    </p>
+                )}
+                <div className='mb-4'>
+                    <input
+                        className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mt-2'
+                        type="email"
+                        name='email'
+                        placeholder='Enter your email'
+                        onChange={formik.handleChange}
+                        value={formik.values.email}
+                    />
+                    {formik.touched.email && formik.errors.email && (
+                        <p className='text-red-500'>{formik.errors.email}</p>
+                    )}
+                </div>
+                <div className='mb-6'>
+                    <input
+                        className='shadow appearance-none py-2 px-3 text-gray-700 w-full mt-2 leading-tight rounded border focus:outline-none focus:shadow-outline'
+                        type="password"
+                        name='password'
+                        placeholder='Enter your password'
+                        onChange={formik.handleChange}
+                        value={formik.values.password}
+                    />
+                    {formik.touched.password && formik.errors.password && (
+                        <p className='text-red-500'>{formik.errors.password}</p>
+                    )}
+                </div>
+                <div className='flex items-center justify-center'>
+                    <button
+                        type='submit'
+                        className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-4'
+                    >
+                        Login
+                    </button>
+                </div>
+            </form>
+            <p className='text-gray-600 text-sm'>
+                Don't have an account? <Link to='/signup' className='text-blue-500'>Sign Up</Link>
+            </p>
+        </div>
+    );
+}
+
+export default Login;

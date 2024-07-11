@@ -41,7 +41,7 @@ class Event(db.Model, SerializerMixin):
     users = association_proxy('registrations', 'user')
 
     def __repr__(self):
-        return f'<Event We have a {self.title} where {self.description} on {self.date}>'
+        return f'<Event We have a {self.title} where {self.description} on {self.date} at{self.location)>'
     
 class Registration(db.Model, SerializerMixin):
     __tablename__ = 'registrations'

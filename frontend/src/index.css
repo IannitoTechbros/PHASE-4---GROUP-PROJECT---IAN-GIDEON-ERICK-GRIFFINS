@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.nav-link{
+    position: relative;
+    display: inline-block;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    display: block;
+    background: hwb(106 3% 6% / 0.91);
+    transition: width 0.4s ease-in-out;
+}
+
+.nav-link:hover::after {
+    width:100%;
+    left: 0;
+}
+
+.bottom-link{
+    position: relative;
+    display: inline-block;
+}
+.bottom-link::after{
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    display: block;
+    background: hwb(106 3% 6% / 0.91);
+    transition: width 0.4s ease-in-out;
+}
+.bottom-link:hover::after{
+    width: 100%;
+    left: 0;
+}

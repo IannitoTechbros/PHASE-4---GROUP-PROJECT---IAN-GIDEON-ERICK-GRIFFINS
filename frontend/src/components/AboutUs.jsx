@@ -38,10 +38,6 @@ const AboutUs = () => {
           <p className="mb-6">Join the Event Hub community and be a part of the next big thing. Whether you're an event organizer or an attendee, we have something for you. Together, let's make every event a memorable one.</p>
         </div>
       </section>
-
-      <footer className="py-6 bg-gray-800 text-gray-100 text-center">
-        <p>&copy; 2024 Event Hub. All rights reserved.</p>
-      </footer>
     </div>
   );
 };

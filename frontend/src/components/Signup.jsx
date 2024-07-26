@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import sha1 from 'sha1';
 
 async function isPasswordPwned(password) {
@@ -18,6 +18,7 @@ async function isPasswordPwned(password) {
 
 function Signup() {
   const [message, setMessage] = useState(null);
+  const nav = useNavigate()
 
   const formik = useFormik({
     initialValues: {
@@ -54,7 +55,8 @@ function Signup() {
           formik.resetForm();
           setTimeout(() => {
             setMessage(null);
-          }, 3000);
+          }, 10000);
+          nav('/login')
         }
       } catch (error) {
         console.error('Error signing up:', error);
@@ -63,9 +65,9 @@ function Signup() {
   });
 
   return (
-    <div className='flex flex-col items-center justify-center min-h-screen bg-blue-100'>
-      <form className='bg-gray-300 shadow-md rounded-lg px-10 pt-8 pb-12 mb-4 w-full max-w-lg' onSubmit={formik.handleSubmit}>
-        <h2 className='text-2xl text-center font-bold mb-6'>Signup</h2>
+    <div className='flex flex-col items-center justify-center min-h-screen bg-blue-200'>
+      <form className='bg-white shadow-md rounded-lg px-10 pt-8 pb-12 mb-4 w-full max-w-lg' onSubmit={formik.handleSubmit}>
+        <h2 className='text-2xl text-center font-bold mb-6'>Welcome to Event Hub</h2>
         <div className='mb-4'>
           <input
             className='shadow appearance-none border border-blue-300 rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mt-2'

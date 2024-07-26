@@ -57,8 +57,8 @@ function Login() {
   });
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen bg-blue-100 px-4 py-8">
-      <div className="w-full max-w-lg bg-gray-300 shadow-md rounded-lg px-8 pt-6 pb-8 mb-4">
+    <div className="flex flex-col items-center justify-center h-screen bg-blue-200 px-4 py-8">
+      <div className="w-full max-w-lg bg-white shadow-md rounded-lg px-8 pt-6 pb-8 mb-4">
         <h2 className="text-3xl text-center font-bold mb-6">Login</h2>
         {message && (
           <p

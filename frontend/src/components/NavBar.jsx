@@ -3,7 +3,8 @@ import { NavLink, Link } from 'react-router-dom';
 
 const Navbar = () => {
   return (
-    <nav className="bg-gray-800 p-2">
+    <>
+    <nav className="fixed top-0 left-0 z-50 w-full bg-gray-800 p-2">
       <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
         <div className="relative flex items-center justify-between h-16">
           <div className="text-white">
@@ -27,6 +28,10 @@ const Navbar = () => {
         </div>
       </div>
     </nav>
+    <main className='pt-18'>
+
+    </main>
+    </>
   );
 };
 

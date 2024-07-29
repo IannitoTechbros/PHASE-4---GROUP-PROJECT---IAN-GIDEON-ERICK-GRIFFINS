@@ -4,9 +4,9 @@ from config import bcrypt
 from datetime import datetime
 from flask_jwt_extended import jwt_required, get_jwt_identity
 
-#@app.route('/')
-#def home():
-#    return 'Welcome to our web'
+@app.route('/')
+def home():
+    return 'Welcome to our web'
 
 @app.route('/signup', methods=['POST'])
 def signup():

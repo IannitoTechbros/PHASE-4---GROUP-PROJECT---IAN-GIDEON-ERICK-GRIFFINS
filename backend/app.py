@@ -1,13 +1,12 @@
-from flask import render_template
 from config import *
 from models import User, Event, Registration
 from config import bcrypt
 from datetime import datetime
 from flask_jwt_extended import jwt_required, get_jwt_identity
 
-@app.errorhandler(404)
-def not_found(e):
-    return render_template("index.html")
+#@app.route('/')
+#def home():
+#    return 'Welcome to our web'
 
 @app.route('/signup', methods=['POST'])
 def signup():
